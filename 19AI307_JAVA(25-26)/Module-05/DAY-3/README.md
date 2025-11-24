@@ -1,67 +1,62 @@
 # Ex.No:5(C)  FILE HANDLING USING JAVA
 ## QUESTION:
-Read a file and print only the lines containing the word "Java".
-
- 
-For example:
-
-Input	Result
-I love Java
-Python is good
-exit
-Lines containing the word 'Java':
-I love Java
+Write a program to count the number of characters in a file.
 
 ## AIM:
-To write a Java program that reads multiple lines of input and prints only the lines containing the word "Java".
+To count and display the total number of characters in a file using FileReader.
 
 ## ALGORITHM :
-1.	Start the program.
-2.	Import the necessary package 'java.util'
-3.	
-
-
-
-
+1.	Ask the user for the file name.
+2.	Open the file using FileReader.
+3.	Read each character one by one until the end of the file.
+4.	Increment a counter for each character read.
+5.	Display the total character count.
 
 ## PROGRAM:
  ```
 /*
 Program to implement a File Handling using Java
 Developed by: GREFFINA SANCHEZ P
-RegisterNumber:212222040048  
+Register Number: 212222040048
 */
 ```
 
 ## SOURCE CODE:
+```java
+import java.io.*;
 
-
-
-```
-import java.util.ArrayList;
-import java.util.Scanner;
-
-public class PrintJavaLines {
+public class FileCharacterCount {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<String> matchingLines = new ArrayList<>();
+        try {
+            // Use BufferedReader to read input
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        String line;
-        
-        // Read input lines until "exit"
-        while (!(line = sc.nextLine()).equals("exit")) {
-            if (line.contains("Java")) {
-                matchingLines.add(line);
+            // Read the text to write (assume file name is fixed)
+            String text = br.readLine();
+
+            // Use a fixed file name
+            String fileName = "output.txt";
+
+            // Write text to file
+            try (FileWriter fw = new FileWriter(fileName)) {
+                if (text != null) {
+                    fw.write(text);
+                }
             }
-        }
 
-        // Print results
-        System.out.println("Lines containing the word 'Java':");
-        for (String s : matchingLines) {
-            System.out.println(s);
-        }
+            // Count characters in file
+            int charCount = 0;
+            try (FileReader fr = new FileReader(fileName)) {
+                while (fr.read() != -1) {
+                    charCount++;
+                }
+            }
 
-        sc.close();
+            System.out.println("Number of characters written to the file: " + charCount);
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 }
 
@@ -69,11 +64,17 @@ public class PrintJavaLines {
 
 
 
+
+
+
 ## OUTPUT:
+<img width="1271" height="303" alt="image" src="https://github.com/user-attachments/assets/8417184e-b934-4c43-a19c-4bc7cec02f4e" />
 
 
 
 ## RESULT:
+The program successfully reads the file and prints the total number of characters present in it.
 
-The program successfully reads multiple lines and prints only the lines containing "Java".
+
+
 
